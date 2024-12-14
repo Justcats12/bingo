@@ -14,11 +14,11 @@ class Bingo():
     def __repr__(self):
         return f"bingo{self.options}"
 
-    def getBingo(self):
+    def getBingo(self, size = DEFAULT_SIZE):
         """Generate the options for a random bingo card in a list"""
         bingoOptions = self.options.copy()
         random.shuffle(bingoOptions)
-        return bingoOptions[:DEFAULT_SIZE]
+        return bingoOptions[:size]
     
     def getFromFile(self, filename):
         bingoFile = open(filename, "r")

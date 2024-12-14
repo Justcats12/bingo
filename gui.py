@@ -43,7 +43,8 @@ def fileEntry():
         filename = fileEntry.get()
         try:
             b = bingo.Bingo(filename=filename)
-            bingoScreen(b).pack()
+            isBig = len(b.options) >= 25
+            bingoScreen(b, isBig).pack()
             screen.destroy()
         except:
             showError("File not found", "Could not find the file :(")
@@ -59,19 +60,26 @@ def fileEntry():
 
     return screen
 
-def bingoScreen(pBingo : bingo.Bingo):
+def bingoScreen(pBingo : bingo.Bingo, pIsBig):
 
     screen = tk.Frame(root)
-    texts = pBingo.getBingo()
+
     
     titleLbl = tk.Label(screen, text=f"BINGO:")
     titleLbl.pack()
     screen.pack()
     screen = tk.Frame(root)
 
-    for i in range(bingo.DEFAULT_SIZE):
-        row = i // (4)
-        col = i % (4)
+    if pIsBig:
+        size = 5
+        texts = pBingo.getBingo(25)
+    else:
+        size = 4
+        texts = pBingo.getBingo()
+
+    for i in range(size**2):
+        row = i // (size)
+        col = i % (size)
         bingoBtn(screen, texts[i]).grid(row=row, column=col)
 
     return screen
