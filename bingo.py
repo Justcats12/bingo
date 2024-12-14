@@ -26,5 +26,3 @@ class Bingo():
 
         self.options = [ l.strip() for l in lines ]
 
-b = Bingo(filename="testfile")
-print(b.getBingo())
