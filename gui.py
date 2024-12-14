@@ -5,6 +5,7 @@ from tkinter import messagebox
 BUTTON_WIDTH = 25
 BINGOBUTTON_WIDTH = 10
 SCREEN_GEOMETRY = "600x600"
+ENTRY_WIDTH = 300
 
 # main window
 root = tk.Tk()
@@ -49,7 +50,7 @@ def fileEntry():
 
     titleLbl = tk.Label(screen, text=f"Input filename:")
 
-    fileEntry = tk.Entry(screen)
+    fileEntry = tk.Entry(screen, width=ENTRY_WIDTH)
     submitBtn = tk.Button(screen, text='Submit', width=BUTTON_WIDTH, command=submit)
 
     titleLbl.pack()
