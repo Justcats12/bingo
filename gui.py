@@ -31,7 +31,6 @@ def bingoBtn(root, text ):
     btn = tk.Button(root, bg="white", activebackground="white",text=text, width=BINGOBUTTON_WIDTH, height=BINGOBUTTON_WIDTH//2, command=tick, justify=tk.LEFT, wraplength=80)
     return btn
 
-
 #
 # file entry window
 #
@@ -85,4 +84,3 @@ def bingoScreen(pBingo : bingo.Bingo, pIsBig):
     return screen
 fileEntry().pack()
 root.mainloop()
-

@@ -25,4 +25,3 @@ class Bingo():
         lines = bingoFile.readlines()
 
         self.options = [ l.strip() for l in lines ]
-
