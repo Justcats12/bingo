@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 import random
 
 DEFAULT_SIZE = 16
