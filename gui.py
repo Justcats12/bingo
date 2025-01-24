@@ -2,11 +2,15 @@
 import tkinter as tk
 import bingo
 from tkinter import messagebox
+import sys
 # constants
 BUTTON_WIDTH = 25
 BINGOBUTTON_WIDTH = 10
 SCREEN_GEOMETRY = "600x600"
 ENTRY_WIDTH = 300
+
+args = sys.argv
+args_given = len(args) > 1
 
 # main window
 root = tk.Tk()
@@ -43,8 +47,7 @@ def fileEntry():
         filename = fileEntry.get()
         try:
             b = bingo.Bingo(filename=filename)
-            isBig = len(b.options) >= 25
-            bingoScreen(b, isBig).pack()
+            bingoScreen(b, b.isBig()).pack()
             screen.destroy()
         except:
             showError("File not found", "Could not find the file :(")
@@ -83,5 +86,11 @@ def bingoScreen(pBingo : bingo.Bingo, pIsBig):
         bingoBtn(screen, texts[i]).grid(row=row, column=col)
 
     return screen
-fileEntry().pack()
+
+
+if args_given:
+    b = bingo.Bingo(filename=args[1])
+    bingoScreen(b, b.isBig()).pack()
+else:
+    fileEntry().pack()
 root.mainloop()

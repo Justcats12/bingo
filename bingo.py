@@ -26,3 +26,5 @@ class Bingo():
         lines = bingoFile.readlines()
 
         self.options = [ l.strip() for l in lines ]
+    def isBig(self):
+        return len(self.options) >= 25
