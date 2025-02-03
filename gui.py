@@ -3,6 +3,7 @@ import tkinter as tk
 import bingo
 from tkinter import messagebox
 import sys
+from tkinter import ttk
 # constants
 BUTTON_WIDTH = 25
 BINGOBUTTON_WIDTH = 10
@@ -10,7 +11,7 @@ SCREEN_GEOMETRY = "600x600"
 ENTRY_WIDTH = 300
 
 args = sys.argv
-args_given = len(args) > 1
+args_given = len(args)
 
 # main window
 root = tk.Tk()
@@ -47,7 +48,7 @@ def fileEntry():
         filename = fileEntry.get()
         try:
             b = bingo.Bingo(filename=filename)
-            bingoScreen(b, b.isBig()).pack()
+            bingoScreen(b, b.isBig() and not 'selected' in tinyCheckbox.state()).pack()
             screen.destroy()
         except:
             showError("File not found", "Could not find the file :(")
@@ -56,10 +57,11 @@ def fileEntry():
 
     fileEntry = tk.Entry(screen, width=ENTRY_WIDTH)
     submitBtn = tk.Button(screen, text='Submit', width=BUTTON_WIDTH, command=submit)
-
+    tinyCheckbox = ttk.Checkbutton(screen, text='Force tiny bingo')
     titleLbl.pack()
     fileEntry.pack()
     submitBtn.pack()
+    tinyCheckbox.pack()
 
     return screen
 
@@ -88,9 +90,12 @@ def bingoScreen(pBingo : bingo.Bingo, pIsBig):
     return screen
 
 
-if args_given:
+if args_given == 2:
     b = bingo.Bingo(filename=args[1])
     bingoScreen(b, b.isBig()).pack()
+elif args_given == 3:
+    b = bingo.Bingo(filename=args[1])
+    bingoScreen(b, args[2]!="-t" and b.isBig()).pack()
 else:
     fileEntry().pack()
 root.mainloop()
